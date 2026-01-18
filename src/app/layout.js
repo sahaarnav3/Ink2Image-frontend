@@ -21,11 +21,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-row`}
+        className={`${geistSans.variable} ${geistMono.variable} flex`}
       >
         <Sidebar />
         {/* The Main Content area shifts to the right by 80px (w-20) */}
-        <main className="flex-1 min-h-screen bg-background">
+        <main className="flex-1 ml-80 min-h-screen bg-[#0a0a0a]">
           {children}
         </main>
       </body>

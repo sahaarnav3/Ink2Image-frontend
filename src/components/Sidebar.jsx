@@ -17,51 +17,61 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="w-80 left-0 top-50 h-screen flex flex-col items-center py-7 px-2.5 bg-neutral-900 z-50">
+    <aside className="fixed left-0 top-0 h-screen w-80 flex flex-col items-center py-7 px-4 bg-neutral-900 z-50 border-r border-white/5">
       {/* Brand Logo - Top Section */}
-      <div className="mb-30 flex items-center ">
-        <div className="flex items-center gap-3 px-5">
-          <FaBook className="text-gray-400" size={30} strokeWidth={1.8} />
-          <h1 className="font-bold text-3xl">Ink2Image</h1>
+      <div className="mb-20 flex items-center w-full px-4">
+        <div className="flex items-center gap-3">
+          <FaBook className="text-gray-300" size={30} />
+          <h1 className="font-bold text-3xl text-white tracking-tight">Ink2Image</h1>
         </div>
       </div>
-      {/* Navigation */}
-      <nav className="flex flex-col gap-3 w-full px-2">
+
+      {/* Navigation - Middle Section */}
+      <nav className="flex flex-col gap-3 mt-5 w-full">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname == item.href;
+          const isActive = pathname === item.href;
           return (
             <Link
               key={item.name}
               href={item.href}
               className={`group relative flex gap-4 items-center p-4 rounded-xl transition-all duration-300 ${
                 isActive
-                  ? "bg-white/25 shadow-lg shadow-black/20"
-                  : "text-muted-foreground hover:bg-white/25 hover:text-white"
+                  ? "bg-white/10 text-white"
+                  : "text-gray-400 hover:bg-white/5 hover:text-white"
               }`}
             >
-              <Icon size={27} />
-              <span className="text-[20px] font-medium tracking-wide opacity-80">
+              <Icon size={26} />
+              <span className="text-lg font-medium tracking-wide">
                 {item.name}
               </span>
-              {/* Active Indicator Bar */}
+              
+              {/* Active Indicator Bar - Left edge */}
               {isActive && (
-                <div className="absolute left-0 h-10 w-1 bg-white rounded-r-full" />
+                <div className="absolute left-0 h-8 w-1 bg-white rounded-r-full" />
               )}
             </Link>
           );
         })}
       </nav>
 
-      {/* User & Settings - Bottom Section */}
-      <div className="flex mt-auto place-self-end gap-2 items-center w-full p-3 rounded-xl bg-neutral-800 ">
-        <div className="h-12 w-12 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 border border-border flex items-center justify-center cursor-pointer hover:border-primary transition-all">
-          <FaUser size={20} className="text-muted-foreground" />
+      {/* User & Logout Section - Pinned to Bottom */}
+      <div className="mt-auto w-full flex items-center gap-3 p-3 rounded-2xl bg-neutral-800/50 border border-white/5">
+        {/* User Avatar Circle */}
+        <div className="h-12 w-12 rounded-full bg-gradient-to-br from-neutral-600 to-neutral-800 border border-white/10 flex items-center justify-center cursor-pointer hover:border-white/40 transition-all">
+          <FaUser size={20} className="text-gray-300" />
         </div>
-        <h1 className="font-bold text-xl">Username</h1>
-        <div className="ml-auto hover:cursor-pointer">
-          <TbLogout size={30} className="text-gray-300" />
+        
+        {/* Username */}
+        <div className="flex flex-col">
+          <h1 className="font-bold text-white text-base">Arnav Saha</h1>
+          <span className="text-xs text-gray-500">Premium Plan</span>
         </div>
+
+        {/* Logout Button */}
+        <button className="ml-auto p-2 hover:bg-white/10 rounded-lg transition-colors text-gray-400 hover:text-red-400">
+          <TbLogout size={26} />
+        </button>
       </div>
     </aside>
   );
