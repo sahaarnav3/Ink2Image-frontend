@@ -11,14 +11,13 @@ export const AuthProvider = ({ children }) => {
   const checkUserStatus = async () => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
-    //   console.log("Base url", baseUrl);
       const response = await axios.get(`${baseUrl}/api/auth/me`, {
         withCredentials: true,
       });
-      console.log("auth provider response", response);
+      // console.log("auth provider response", response);
       setUser(response.data);
     } catch (error) {
-    //   console.log("cookies fetching error:", error.response.data.message);
+      //   console.log("cookies fetching error:", error.response.data.message);
       setUser(null);
     } finally {
       setLoading(false);

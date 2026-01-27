@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
@@ -23,27 +24,34 @@ export default function Login() {
         { withCredentials: true },
       );
       await checkUserStatus();
+      toast.success("Welcome back, Reader!");
       router.push("/dashboard");
     } catch (error) {
-      alert("Invalid Credentials. Please try again.");
+    //   console.log("Error registering user: ", error.response.data.message);
+      toast.error(error.response.data.message);
     }
   };
 
   return (
-    <div className="flex flex-col items-center mt-25 justify-center w-full max-w-md px-6 border border-[1px] border rounded-4xl py-5 border-gray-400/20 backdrop-blur-xl shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+    <div className="flex flex-col items-center justify-center w-full max-w-md px-6 border border-[1px] border rounded-4xl py-5 border-gray-400/20 backdrop-blur-xl shadow-[0_0_10px_rgba(255,255,255,0.5)]">
       {/* Branding */}
-      <div className="flex flex-col items-center mb-10 ">
+      <div className="flex flex-col items-center mb-8 ">
         <div className="p-5 rounded-2xl">
-          <FaBookBookmark className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]" size={70} />
+          <FaBookBookmark
+            className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]"
+            size={70}
+          />
         </div>
         <h1 className="text-4xl font-bold text-white tracking-tight">
           Ink2Image
         </h1>
-        <p className="text-gray-300 text-lg mt-2 font-medium">Welcome back, Reader.</p>
+        <p className="text-gray-300 text-lg mt-2 font-medium">
+          Welcome back, Reader.
+        </p>
       </div>
 
       {/* Form Card */}
-      <div className="w-full px-5 py-4">
+      <div className="w-full px-5 pb-5">
         <form onSubmit={handleLogin} className="space-y-2">
           <div className="space-y-2">
             <label className="text-sm font-semibold text-gray-400 ml-1 inline-block mb-1">
