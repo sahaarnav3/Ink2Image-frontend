@@ -62,3 +62,17 @@
     @apply bg-background text-foreground antialiased;
   }
 }
+
+main::-webkit-scrollbar {
+  height: 4px; /* Horizontal height */
+  width: 6px;  /* Vertical width */
+}
+
+main::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.2); /* Subtle amber */
+  border-radius: 10px;
+}
+
+main::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.5); /* Stronger amber on hover */
+}
