@@ -28,7 +28,6 @@ export default function Register() {
       await axios.post(`${apiBaseUrl}/api/auth/register`, formData, {
         withCredentials: true,
       });
-      await checkUserStatus();
       toast.success("Account Created. Please Login To Continue!");
       router.push("/login");
     } catch (error) {
@@ -39,20 +38,20 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-[95%] sm:w-full max-w-md min-w-[300px] px-4 sm:px-6 border border-white/10 rounded-3xl sm:rounded-4xl py-6 sm:py-8 border-gray-400/20 backdrop-blur-xl shadow-[0_0_10px_rgba(255,255,255,0.3)] my-10">
+    <div className="flex flex-col items-center justify-center w-[95%] sm:w-full max-w-md min-w-[300px] px-4 sm:px-6 border border-amber-500/10 rounded-3xl sm:rounded-4xl py-6 sm:py-8 bg-black/40 backdrop-blur-xl shadow-[0_0_50px_rgba(217,119,6,0.15)] my-10">
       {/* Branding */}
       <div className="flex flex-col items-center mb-6 sm:mb-8">
         <div className="p-3 sm:p-5 rounded-2xl">
           <FaBookBookmark
-            className="text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]"
+            className="text-amber-50 text-amber-100 drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]"
             size={70}
           />
         </div>
         <h1 className="text-4xl font-bold text-white tracking-tight">
           Ink2Image
         </h1>
-        <p className="text-gray-300 text-lg mt-2 font-medium">
-          Welcome back, Reader.
+        <p className="text-amber-200/60 text-lg mt-2 font-medium">
+          Begin your journey.
         </p>
       </div>
 
@@ -60,12 +59,12 @@ export default function Register() {
       <div className="w-full px-2 sm:px-5 pb-2 sm:pb-5">
         <form onSubmit={handleRegister} className="space-y-3 sm:space-y-4">
           <div className="space-y-1 sm:space-y-1">
-            <label className="text-xs sm:text-sm font-semibold text-gray-400 ml-1 inline-block">
+            <label className="text-xs sm:text-sm font-bold text-amber-500 uppercase tracking-wide ml-1 inline-block">
               Full Name
             </label>
             <input
               type="text"
-              className="w-full bg-black/40 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 text-white outline-none focus:border-white/30 transition-all text-sm sm:text-base"
+              className="w-full bg-black/60 border border-amber-500/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 text-white outline-none focus:border-amber-500/40 placeholder:text-amber-500/50 transition-all text-sm sm:text-base"
               placeholder="Your Name"
               onChange={(e) =>
                 setFormData({ ...formData, fullName: e.target.value })
@@ -75,12 +74,12 @@ export default function Register() {
           </div>
 
           <div className="space-y-1 sm:space-y-1">
-            <label className="text-xs sm:text-sm font-semibold text-gray-400 ml-1 inline-block">
+            <label className="text-xs sm:text-sm font-bold text-amber-500 uppercase tracking-wide ml-1 inline-block">
               Username
             </label>
             <input
               type="text"
-              className="w-full bg-black/40 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 text-white outline-none focus:border-white/30 transition-all text-sm sm:text-base"
+              className="w-full bg-black/60 border border-amber-500/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 text-white outline-none focus:border-amber-500/40 placeholder:text-amber-500/50 transition-all text-sm sm:text-base"
               placeholder="user_name"
               onChange={(e) =>
                 setFormData({ ...formData, username: e.target.value })
@@ -90,12 +89,12 @@ export default function Register() {
           </div>
 
           <div className="space-y-1 sm:space-y-1">
-            <label className="text-xs sm:text-sm font-semibold text-gray-400 ml-1 inline-block">
+            <label className="text-xs sm:text-sm font-bold text-amber-500 uppercase tracking-wide ml-1 inline-block">
               Email Address
             </label>
             <input
               type="email"
-              className="w-full bg-black/40 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 text-white outline-none focus:border-white/30 transition-all text-sm sm:text-base"
+              className="w-full bg-black/60 border border-amber-500/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 text-white outline-none focus:border-amber-500/40 placeholder:text-amber-500/50 transition-all text-sm sm:text-base"
               placeholder="name@example.com"
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -105,12 +104,12 @@ export default function Register() {
           </div>
 
           <div className="space-y-1 sm:space-y-1">
-            <label className="text-xs sm:text-sm font-semibold text-gray-400 ml-1 inline-block">
+            <label className="text-xs sm:text-sm font-bold text-amber-500 uppercase tracking-wide ml-1 inline-block">
               Password
             </label>
             <input
               type="password"
-              className="w-full bg-black/40 border border-white/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 text-white outline-none focus:border-white/30 transition-all text-sm sm:text-base"
+              className="w-full bg-black/60 border border-amber-500/10 rounded-xl sm:rounded-2xl px-4 sm:px-5 py-3 sm:py-4 text-white outline-none focus:border-amber-500/40 placeholder:text-amber-500/50 transition-all text-sm sm:text-base"
               placeholder="••••••••"
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
@@ -121,18 +120,18 @@ export default function Register() {
 
           <button
             disabled={isLoading}
-            className="w-full bg-white text-black font-extrabold py-3 sm:py-4 rounded-xl sm:rounded-2xl hover:bg-gray-200 transition-all active:scale-[0.98] mt-4 sm:mt-5 text-sm sm:text-base"
+            className="w-full bg-amber-500 text-black font-extrabold py-3 sm:py-4 rounded-xl sm:rounded-2xl hover:bg-amber-400 hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] transition-all active:scale-[0.98] mt-4 sm:mt-5 text-sm sm:text-base"
           >
             {isLoading ? "Creating Identity..." : "Begin Journey"}
           </button>
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-sm sm:text-base text-gray-400">
+          <p className="text-base sm:text-sm text-gray-500">
             Already a member?{"  "}
             <Link
               href="/login"
-              className="text-blue-500 font-bold hover:underline underline-offset-4"
+              className="text-amber-500 font-bold hover:underline hover:text-amber-400 underline-offset-4 transition-colors"
             >
               Log In
             </Link>
