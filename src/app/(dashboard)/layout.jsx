@@ -57,8 +57,8 @@ export default function DashboardLayout({ children }) {
         </button>
       </div>
       {/* Main Content Area */}
-      <main className="relative z-20 flex-1 mt-20 lg:mt-0 ml-0 lg:ml-80 min-h-screen p-4 sm:p-4 overflow-x-auto">
-        <div className="max-w-[1600px] min-w-[320px] mx-auto">{children}</div>
+      <main className="relative z-20 flex flex-1 mt-20 lg:mt-0 ml-0 lg:ml-80 min-h-screen p-4 sm:p-4 overflow-x-auto">
+        <div className="max-w-[1600px] min-w-[320px] w-full mx-auto flex-1 flex flex-col">{children}</div>
       </main>
     </div>
   );

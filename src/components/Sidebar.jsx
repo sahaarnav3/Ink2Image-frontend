@@ -20,7 +20,7 @@ export default function Sidebar() {
   ];
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-80 flex flex-col items-center py-7 px-4 bg-black/20 backdrop-blur-3xl z-50 border-r border-amber-600/10 shadow-[20px_0_60px_rgba(0,0,0,0.4)]">
+    <aside className="fixed left-0 top-0 h-screen w-80 flex flex-col items-center py-7 px-4 bg-black/20 backdrop-blur-3xl z-50 border-r border-amber-600/20 shadow-[20px_0_60px_rgba(0,0,0,0.4)]">
       {/* Brand Logo - Integrated Amber Glow */}
       <div className="mb-20 flex items-center w-full px-4">
         <div className="flex items-center gap-3">
