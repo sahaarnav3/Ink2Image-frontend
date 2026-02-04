@@ -2,17 +2,9 @@
 import { useState } from "react";
 import { FaMagnifyingGlass, FaFilter, FaChevronDown } from "react-icons/fa6";
 
-export default function LibraryHeader({ onFilterChange, onSearch }) {
+export default function LibraryHeader({ setSearchQuery, setFilter, activeFilter }) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [activeFilter, setActiveFilter] = useState("Recent First");
-
-  const filters = ["Recent First", "Oldest First", "Completed", "Drafts"];
-
-  const handleSelect = (filter) => {
-    setActiveFilter(filter);
-    setIsFilterOpen(false);
-    onFilterChange(filter); // Pass the selection up to the parent
-  };
+  const filters = ["Recent First", "Oldest First"];
 
   return (
     <div className="w-full px-4 md:px-6 py-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -33,7 +25,7 @@ export default function LibraryHeader({ onFilterChange, onSearch }) {
           <FaMagnifyingGlass className="absolute left-4 top-1/2 -translate-y-1/2 text-amber-500/40 group-focus-within:text-amber-500 transition-colors" />
           <input
             type="text"
-            onChange={(e) => onSearch(e.target.value)}
+            onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search books..."
             className="w-full bg-black/40 border border-amber-500/10 rounded-2xl py-3 pl-11 pr-4 text-white placeholder:text-gray-600 outline-none focus:border-amber-500/40 transition-all text-sm"
           />
@@ -60,7 +52,10 @@ export default function LibraryHeader({ onFilterChange, onSearch }) {
               {filters.map((filter) => (
                 <button
                   key={filter}
-                  onClick={() => handleSelect(filter)}
+                  onClick={() => {
+                    setFilter(filter);
+                    setIsFilterOpen(false);
+                  }}
                   className={`w-full text-left px-4 py-2.5 rounded-lg text-sm transition-colors ${
                     activeFilter === filter
                       ? "bg-amber-500/20 text-amber-400 font-bold"
