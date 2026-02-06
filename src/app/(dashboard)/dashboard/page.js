@@ -28,17 +28,17 @@ export default function Dashboard() {
         });
         // console.log("bookdat", data);
         const formattedBooks = data.map((item) => ({
-          id: item.bookId._id,
-          title: item.bookId.title,
-          status: item.bookId.status,
-          pageCount: item.bookId.totalPages || 0,
+          id: item.bookId?._id,
+          title: item.bookId?.title,
+          status: item.bookId?.status,
+          pageCount: item.bookId?.totalPages || 0,
           date: new Date(item.addedAt).toLocaleDateString("en-IN", {
             day: "2-digit",
             month: "short",
             year: "numeric",
           }),
           coverImage:
-            item.bookId.coverImage ||
+            item.bookId?.coverImage ||
             "https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=800",
         }));
         setBooks(formattedBooks);

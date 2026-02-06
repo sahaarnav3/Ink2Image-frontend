@@ -1,7 +1,7 @@
 "use client";
 
 import Sidebar from "@/components/Sidebar";
-import bg from "../../images/dashboard.jpg";
+// import bg from "../../images/dashboard2.jpg";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { useState } from "react";
 import { FaBookBookmark } from "react-icons/fa6";
@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }) {
   return (
     <div className="relative min-h-screen w-full flex bg-black overflow-hidden">
       {/* Global Fixed Background */}
-      <div className="fixed inset-0 z-0 bg-no-repeat bg-[url('../images/dashboard.jpg')] bg-cover bg-center" />
+      <div className="fixed inset-0 z-0 bg-no-repeat bg-[url('../images/dashboard2.jpg')] bg-cover bg-center" />
       {/* <div
         className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-60"
         style={{ backgroundImage: `url(${bg.src})` }}
