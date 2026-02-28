@@ -13,6 +13,7 @@ import {
   FaShieldAlt,
   FaSignal,
 } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -28,6 +29,7 @@ export default function UploadPage() {
     characters: null,
   });
   const socketRef = useRef(null);
+  const router = useRouter();
 
   //Socket Initialization
   useEffect(() => {
@@ -45,6 +47,34 @@ export default function UploadPage() {
       setStage("error");
       toast.error(`NEURAL LINK SEVERED: ${data.message}`);
     });
+
+    //Checking for active session(processing) on load
+    const checkActiveSession = async () => {
+      try {
+        const res = await axios.get(
+          `${apiBaseUrl}/api/books/check-active-session`,
+          {
+            withCredentials: true,
+          },
+        );
+        if (res.data.active) {
+          console.log("Resuming active session for:", res.data.title);
+
+          // 1. Update UI immediately
+          setStage("processing");
+          setProgress({
+            overall: res.data.progress,
+            statusText: res.data.status.replace(/_/g, " "),
+          });
+
+          // 2. Re-join the socket room!
+          socketRef.current.emit("join_book_room", res.data.bookId);
+        }
+      } catch (error) {
+        console.error("Failed to check active session:", err);
+      }
+    };
+    checkActiveSession();
 
     return () => {
       if (socketRef.current) socketRef.current.disconnect();
@@ -267,7 +297,7 @@ export default function UploadPage() {
 
                 {/* Activation Button */}
                 <button
-                  disabled={!file}
+                  disabled={!file || stage === "initializing" || stage == "processing"}
                   className={`flex-shrink-0 py-4 md:py-5 rounded-xl font-black uppercase tracking-[0.3em] text-[11px] transition-all duration-500 ${file ? "bg-amber-500 text-black shadow-lg" : "bg-white/5 text-gray-700 border border-white/5"} cursor-pointer`}
                   onClick={handleExecute}
                 >
