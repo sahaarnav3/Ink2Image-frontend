@@ -25,8 +25,7 @@ export default function UploadPage() {
     statusText: "Awaiting Source",
   });
   const [generatedAssets, setGeneratedAssets] = useState({
-    cover: null,
-    characters: null,
+    cover: null
   });
   const socketRef = useRef(null);
   const router = useRouter();
@@ -36,6 +35,9 @@ export default function UploadPage() {
     socketRef.current = io(apiBaseUrl);
 
     socketRef.current.on("pipeline_update", (data) => {
+      if(data.progress >= 75 && data.progress < 90)
+        setGeneratedAssets({ cover: data.coverImage });
+
       setProgress({
         overall: data.progress,
         statusText: data.status.replace(/_/g, " "),
@@ -246,7 +248,14 @@ export default function UploadPage() {
                         <StatusItem
                           label="PROMPT SERIALIZATION"
                           loading={
-                            progress.overall >= 75 && progress.overall < 100
+                            progress.overall >= 75 && progress.overall < 90
+                          }
+                          done={progress.overall >= 90}
+                        />
+                        <StatusItem
+                          label="FINAL IMG GENERATION"
+                          loading={
+                            progress.overall >= 90 && progress.overall < 100
                           }
                           done={progress.overall === 100}
                         />
